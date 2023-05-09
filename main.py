@@ -13,7 +13,7 @@ def cfg_open(file:str,name:str):
 	try:
 		f = codecs.open(file, "r", "utf-8")
 	except:
-		error(f"Не вдалося знайти файл: {file}")
+		error(f"The file could not be found: {file}")
 		return
 	
 	for line in f:
@@ -28,48 +28,48 @@ def cfg_open(file:str,name:str):
 		if key == name and key != "__none__":
 			return value.replace("\n","").replace("\r","")
 	
-	error(f'Не вдалося знайти параметр, під назвою \"{name}\"')
+	error(f'Failed to find the parameter named \"{name}\"')
 	return
 
-def error(text:str="Сталася невідома помилка!"):
+def error(text:str="An unknown error has occurred!"):
 	print(text)
-	input("Натисніть будь-яку клавішу, щоб вийти . . . ")
+	input("Press any key to exit . . . ")
 	sys.exit()
 
 try:
 	client_id = int(cfg_open('config.cfg','client_id'))
-except: error('Параметр \"client_id\" повинен бути цілим числом!')
+except: error('Parameter \"client_id\" must be an integer!')
 
 try:
 	update_rate = int(cfg_open('config.cfg','update_rate'))
 	if update_rate < 15: update_rate = 15
-except: error('Параметр \"update_rate\" повинен бути цілим числом!')
+except: error('Parameter \"update_rate\" must be an integer!')
 
 statuses_file = cfg_open('config.cfg','statuses_file')
 
 try:
 	status_type = int(cfg_open('config.cfg','status_type'))
-except: error('Параметр \"status_type\" повинен бути цілим числом!')
+except: error('Parameter \"status_type\" must be an integer!')
 
 status_name = cfg_open('config.cfg','status_name')
 
 
-print(f"AdvRPC v{version} успішно запущено!\nРозробник: {creator}")
+print(f"AdvRPC v{version} successfully launched!\nDeveloper: {creator}")
 try:
 	RPC = Presence(client_id)
 	RPC.connect()
 except:
-	error("Не вдалося запустити RPC. (Можливо ви вказали не вірний Client ID)")
+	error("Failed to start RPC. (You may have entered an incorrect Client ID)")
 
 def update_status():
 	try:
 		with open(statuses_file, "r",encoding='utf-8') as f: statuses = json.load(f)
-	except: error(f"Не вдалося відкрити файл: {statuses_file}")
+	except: error(f"Failed to open file: {statuses_file}")
 	
 	if status_type == 1: status = statuses[random.choice(list(statuses.keys()))]
 	elif status_type == 2:
 		try: status = statuses[status_name]
-		except: error(f'Не вдалося знайти вказаний статус \"{status_name}\"!')
+		except: error(f'The specified status could not be found \"{status_name}\"!')
 	else: status = statuses[list(statuses.keys())[0]]
 	
 	if "large_image" in status:
@@ -113,12 +113,12 @@ def update_status():
 
 try:
 	with open(statuses_file, "r",encoding='utf-8') as f: statuses = json.load(f)
-except: error(f"Не вдалося відкрити файл: {statuses_file}")
+except: error(f"Failed to open file: {statuses_file}")
 
 if status_type == 1: status = statuses[random.choice(list(statuses.keys()))]
 elif status_type == 2:
 	try: status = statuses[status_name]
-	except: error(f'Не вдалося знайти вказаний статус \"{status_name}\"!')
+	except: error(f'The specified status could not be found \"{status_name}\"!')
 else: status = statuses[list(statuses.keys())[0]]
 
 if status_type != 1 and status["timer"].lower() == "true":
