@@ -5,7 +5,7 @@ import time
 import random
 import json
 
-version = "1.0"
+version = "beta 0.2"
 creator = "das Alex#2023"
 
 
@@ -54,7 +54,7 @@ except: error('Parameter \"status_type\" must be an integer!')
 status_name = cfg_open('config.cfg','status_name')
 
 
-print(f"AdvRPC v{version} successfully launched!\nDeveloper: {creator}")
+print(f"AdvRPC {version} successfully launched!\nDeveloper: {creator}")
 try:
 	RPC = Presence(client_id)
 	RPC.connect()
