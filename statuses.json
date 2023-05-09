@@ -1,0 +1,19 @@
+{
+    "example": {
+        "details": "Україномовний сервер (150+ учасників)",
+        "state": "Заходь до нас!",
+        "large_image": "ce",
+        "large_text": "ChromaEmpire",
+        "small_image": "alex",
+        "small_text": "das Alex#2023",
+        "timer": "true",
+        "buttons": [{
+            "label": "Приєднатися",
+            "url": "https://discord.gg/6UpZ4gVcud"
+        },
+        {
+            "label": "ceServers",
+            "url": "https://discord.com/api/oauth2/authorize?client_id=1081576202902442145&permissions=537259041&scope=applications.commands%20bot"
+        }]
+    }
+}
